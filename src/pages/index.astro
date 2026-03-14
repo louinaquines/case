@@ -15,7 +15,6 @@ import photo3 from '../assets/pic3.jpg';
 import photo4 from '../assets/pic4.jpg';
 import photo5 from '../assets/pic1.jpg';
 import photo6 from '../assets/pic5.jpg';
-import ChatBot from '../components/ChatBot.astro';
 
 
 const allProjects = await getCollection('projects');
@@ -97,8 +96,8 @@ const galleryImages = [
           <p class="profile-location">Mandaue City, Cebu</p>
           <p class="profile-role">Full Stack Developer · IT Student</p>
           <div class="profile-actions">
-            <a href="/resume.pdf" download class="btn-primary"> Download Resume</a>
-            <button id="open-schedule-modal" class="btn-secondary btn-schedule-trigger">Schedule a Call</button>
+            <a href="/resume.pdf" download class="btn-primary">⬇ Download Resume</a>
+            <button id="open-schedule-modal" class="btn-secondary btn-schedule-trigger">📅 Schedule a Call</button>
           </div>
         </div>
       </div>
@@ -309,6 +308,15 @@ const galleryImages = [
             </li>
             <li>
               <span class="contact-icon">
+                <img src="https://cdn.simpleicons.org/linkedin/0A66C2" width="15" height="15" alt="LinkedIn" />
+              </span>
+              <div>
+                <span class="contact-label">LinkedIn</span>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener" class="contact-value">linkedin.com/in/yourusername</a>
+              </div>
+            </li>
+            <li>
+              <span class="contact-icon">
                 <img src="https://cdn.simpleicons.org/github/000000" width="15" height="15" alt="GitHub" />
               </span>
               <div>
@@ -322,7 +330,6 @@ const galleryImages = [
       </div>
     </div>
   </main>
-  <ChatBot />
 
   <!-- ── TECH STACK MODAL ── -->
   <div class="modal-overlay" id="stack-modal">
