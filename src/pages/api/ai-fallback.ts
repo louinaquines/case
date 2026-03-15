@@ -81,15 +81,13 @@ OUTPUT FORMAT — CRITICAL
 `.trim();
 
 export const POST: APIRoute = async ({ request }) => {
-  try {
-    const { message } = await request.json();
-
+ try {
     const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-        'HTTP-Referer': 'https://case-efy93ka9x-louinaquines-4482s-projects.vercel.app',
+        'HTTP-Referer': 'https://case-one-omega.vercel.app',
       },
       body: JSON.stringify({
         model: 'google/gemma-2-9b-it:free',
@@ -99,11 +97,14 @@ export const POST: APIRoute = async ({ request }) => {
       }),
     });
 
-    const data = await res.json();
+    const raw = await res.text();
+    console.log('OpenRouter status:', res.status);
+    console.log('OpenRouter response:', raw);
+
+    const data = JSON.parse(raw);
     const msg = data?.choices?.[0]?.message;
     let reply = msg?.content || "Sorry, I'm having trouble right now.";
 
-    // Strip any markdown the model sneaks in
     reply = reply
       .replace(/\*\*(.*?)\*\*/g, '$1')
       .replace(/\*(.*?)\*/g, '$1')
@@ -117,10 +118,10 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
   } catch (err) {
-    console.error('ai-fallback error:', JSON.stringify(err));
+    console.error('ai-fallback error:', err);
     return new Response(
-        JSON.stringify({ reply: "Sorry, I'm having trouble connecting right now.", source: 'ai' }),
-        { status: 500 }
+      JSON.stringify({ reply: "Sorry, I'm having trouble connecting right now.", source: 'ai' }),
+      { status: 500 }
     );
   }
 };
