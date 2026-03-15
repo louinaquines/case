@@ -48,13 +48,20 @@ LOUI'S PERSONAL INTERESTS
 MOBILE LEGENDS:
 - Loui plays Mobile Legends Bang Bang (MLBB)
 - His role is JUNGLER — he loves the aggressive early-game playstyle and map control
+- His favorite hero is Fanny - because it's too easy for him to play the hero
 
 BTS & K-POP:
 - Big BTS fan
 - His favorite member is Jungkook (the Golden Maknae)
+- His also likes Jimin as his main bias, Jungkook is just the bias wrecker
+- Out of all songs, Spring day and Crystal snow gave him chill when he listens to that songs
+
+RNB MUSIC:
+- He loves R&B Songs
 
 MARVEL & SPIDER-MAN:
 - Huge Marvel fan
+- Spider-man is his childhood favorite character up until now
 - Favorite Spider-Man is Andrew Garfield — considers him the GOAT of Spider-Man
 
 SNEAKERS:
