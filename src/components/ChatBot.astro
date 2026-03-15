@@ -242,7 +242,7 @@
     display: block;
   }
 
-  /* ── Message rows — :global so JS-created elements are styled ── */
+  /* ── Message rows ── */
   :global(.cb-row) {
     display: flex;
     margin-top: 0.2rem;
@@ -281,6 +281,23 @@
     color: var(--color-bg) !important;
     border: none !important;
     border-radius: 16px 4px 16px 16px !important;
+  }
+  /* Owner (Loui) — blue, left, sharp top-left */
+  :global(.cb-bub-owner) {
+    background: #2563eb !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 4px 16px 16px 16px !important;
+  }
+  /* Owner label */
+  :global(.cb-owner-label) {
+    display: block !important;
+    font-size: 0.62rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    opacity: 0.8;
+    margin-bottom: 3px !important;
   }
   /* Timestamp */
   :global(.cb-time) {
@@ -428,14 +445,29 @@
   toggleBtn.addEventListener('click', () => isOpen ? closeChat() : openChat());
   closeBtn.addEventListener('click', closeChat);
 
-  // role: 'in' = AI (left) | 'out' = user (right)
+  // role: 'in' = AI (left) | 'out' = user (right) | 'owner' = Loui (blue, left)
   function addBubble(text, role) {
     const row = document.createElement('div');
-    row.className = `cb-row cb-row-${role}`;
+    row.className = `cb-row ${role === 'out' ? 'cb-row-out' : 'cb-row-in'}`;
 
     const bub = document.createElement('div');
-    bub.className = `cb-bub cb-bub-${role}`;
-    bub.innerHTML = text.replace(/\n/g, '<br>');
+    bub.className = `cb-bub ${
+      role === 'out' ? 'cb-bub-out' :
+      role === 'owner' ? 'cb-bub-owner' :
+      'cb-bub-in'
+    }`;
+
+    // Show "Loui" label for owner messages
+    if (role === 'owner') {
+      const label = document.createElement('span');
+      label.className = 'cb-owner-label';
+      label.textContent = 'Loui';
+      bub.appendChild(label);
+    }
+
+    const textNode = document.createElement('span');
+    textNode.innerHTML = text.replace(/\n/g, '<br>');
+    bub.appendChild(textNode);
 
     const time = document.createElement('span');
     time.className = 'cb-time';
@@ -446,7 +478,7 @@
     msgsEl.appendChild(row);
     msgsEl.scrollTop = msgsEl.scrollHeight;
 
-    if (!isOpen && role === 'in') {
+    if (!isOpen && role !== 'out') {
       unreadEl.style.display = 'block';
     }
   }
@@ -479,9 +511,10 @@
         body: JSON.stringify({ message: text, sessionId }),
       });
 
-      // Step 2: Poll /api/reply every 1s for up to 10s
+      // Step 2: Poll /api/reply every 1s for up to 10s waiting for Loui's reply
       const start = Date.now();
       let reply = null;
+      let replySource = 'ai';
 
       while (Date.now() - start < 10000) {
         await new Promise(r => setTimeout(r, 1000));
@@ -489,6 +522,7 @@
         const data = await res.json();
         if (data.reply) {
           reply = data.reply;
+          replySource = 'owner'; // came from Loui via Telegram
           break;
         }
       }
@@ -502,10 +536,11 @@
         });
         const data = await res.json();
         reply = data.reply;
+        replySource = 'ai';
       }
 
       setTyping(false);
-      addBubble(reply || "Sorry, I'm having trouble right now.", 'in');
+      addBubble(reply || "Sorry, I'm having trouble right now.", replySource);
 
     } catch (err) {
       setTyping(false);
