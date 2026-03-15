@@ -48,7 +48,7 @@ LOUI'S PERSONAL INTERESTS
 MOBILE LEGENDS:
 - Loui plays Mobile Legends Bang Bang (MLBB)
 - His role is JUNGLER — he loves the aggressive early-game playstyle and map control
-- His favorite hero is Fanny - because it's too easy for him to play the hero
+- He is a former Top Cebu Lancelot
 
 BTS & K-POP:
 - Big BTS fan
@@ -101,7 +101,7 @@ export const POST: APIRoute = async ({ request }) => {
       body: JSON.stringify({
         model: 'openrouter/free',
         messages: [{ role: 'user', content: `${SYSTEM_CONTEXT}\n\nUser message: ${message}` }],
-        max_tokens: 200,
+        max_tokens: 500,
         temperature: 0.75,
       }),
     });
