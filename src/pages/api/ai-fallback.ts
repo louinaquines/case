@@ -49,6 +49,7 @@ MOBILE LEGENDS:
 - Loui plays Mobile Legends Bang Bang (MLBB)
 - His role is JUNGLER — he loves the aggressive early-game playstyle and map control
 - He is a former Top Cebu Lancelot
+- His GOAT is Kairi and Karltzy - but Karltzy is the Face of MLBB
 
 BTS & K-POP:
 - Big BTS fan
