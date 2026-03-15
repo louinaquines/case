@@ -504,51 +504,57 @@
     setTyping(true);
 
     try {
-      // Step 1: Notify server + Telegram — returns immediately
       await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text, sessionId }),
       });
 
-      // Step 2: Poll /api/reply every 1s for up to 10s waiting for Loui's reply
+      // Poll for Loui's reply for 10s
       const start = Date.now();
-      let reply = null;
-      let replySource = 'ai';
+      let louiReplied = false;
 
       while (Date.now() - start < 10000) {
         await new Promise(r => setTimeout(r, 1000));
         const res = await fetch(`/api/reply?sessionId=${sessionId}`);
         const data = await res.json();
         if (data.reply) {
-          reply = data.reply;
-          replySource = 'owner'; // came from Loui via Telegram
+          setTyping(false);
+          addBubble(data.reply, 'owner');
+          louiReplied = true;
           break;
         }
       }
 
-      // Step 3: No reply from Loui — call AI fallback
-      if (!reply) {
+      // No reply from Loui — use AI fallback
+      if (!louiReplied) {
         const res = await fetch('/api/ai-fallback', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: text }),
         });
         const data = await res.json();
-        reply = data.reply;
-        replySource = 'ai';
+        setTyping(false);
+        addBubble(data.reply || "Sorry, I'm having trouble right now.", 'in');
       }
 
-      setTyping(false);
-      addBubble(reply || "Sorry, I'm having trouble right now.", replySource);
-
+      // Keep polling for late Loui replies (for 5 more minutes)
+      const lateStart = Date.now();
+      const latePoll = setInterval(async () => {
+        if (Date.now() - lateStart > 300000) { clearInterval(latePoll); return; }
+        const res = await fetch(`/api/reply?sessionId=${sessionId}`);
+        const data = await res.json();
+        if (data.reply) {
+          addBubble(data.reply, 'owner');
+          clearInterval(latePoll);
+        }
+      }, 3000);
     } catch (err) {
       setTyping(false);
       addBubble("Sorry, I'm having trouble connecting right now.", 'in');
       console.error('ChatBot error:', err);
     }
   }
-
   sendBtn.addEventListener('click', sendMessage);
   inputEl.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) {
