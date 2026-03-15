@@ -92,7 +92,7 @@ export const POST: APIRoute = async ({ request }) => {
         'HTTP-Referer': 'https://case-efy93ka9x-louinaquines-4482s-projects.vercel.app',
       },
       body: JSON.stringify({
-        model: 'mistralai/mistral-7b-instruct:free',
+        model: 'google/gemma-2-9b-it:free',
         messages: [{ role: 'user', content: `${SYSTEM_CONTEXT}\n\nUser message: ${message}` }],
         max_tokens: 200,
         temperature: 0.75,
@@ -117,10 +117,10 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
   } catch (err) {
-    console.error('ai-fallback error:', err);
+    console.error('ai-fallback error:', JSON.stringify(err));
     return new Response(
-      JSON.stringify({ reply: "Sorry, I'm having trouble connecting right now.", source: 'ai' }),
-      { status: 500 }
+        JSON.stringify({ reply: "Sorry, I'm having trouble connecting right now.", source: 'ai' }),
+        { status: 500 }
     );
   }
 };
