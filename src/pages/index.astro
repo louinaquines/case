@@ -97,8 +97,8 @@ const galleryImages = [
           <p class="profile-location">Mandaue City, Cebu</p>
           <p class="profile-role">Full Stack Developer · IT Student</p>
           <div class="profile-actions">
-            <a href="/resume.pdf" download class="btn-primary">🚀 View My Latest Project</a>
-            <button id="open-schedule-modal" class="btn-secondary btn-schedule-trigger">💼 Hire Me for Freelance</button>
+            <button id="open-projects-modal" class="btn-primary btn-schedule-trigger">🚀 View My Latest Project</button>
+            <button id="open-hire-modal" class="btn-secondary btn-schedule-trigger">💼 Hire Me for Freelance</button>
           </div>
         </div>
       </div>
@@ -379,107 +379,64 @@ const galleryImages = [
     </div>
   </div>
 
-  <!-- ── PROJECTS MODAL ── -->
+  <!-- ── VIEW MY LATEST PROJECT MODAL ── -->
   <div class="modal-overlay" id="projects-modal">
-    <div class="modal-backdrop" id="modal-backdrop"></div>
-    <div class="modal-panel">
+    <div class="modal-backdrop" id="projects-modal-backdrop"></div>
+    <div class="modal-panel modal-panel--gallery">
       <div class="modal-header">
         <h2 class="modal-title">
           <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          All Projects
+          View My Latest Project
         </h2>
         <button class="modal-close" id="close-projects-modal" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
-        {false ? (
-          <div class="modal-projects-grid">
-            {allProjectsSorted.map(project => (
-              <a href={`/projects/${project.id}`} class="modal-project-card">
-                <span class="project-role">{project.data.role}</span>
-                <h3 class="project-title">{project.data.title}</h3>
-                <p class="project-desc">{project.data.outcomeSummary}</p>
-              </a>
-            ))}
+        <p class="gallery-modal-intro">Check out my latest project — a full-stack solution I built from the ground up.</p>
+        
+        <a href="https://pagkainang-sambayanan-production.up.railway.app/" target="_blank" rel="noopener" class="modal-project-card">
+          <div class="mpc-header">
+            <span class="mpc-role-badge">Full Stack Developer</span>
+            <span class="mpc-link-icon">↗</span>
           </div>
-        ) : (
-          <div class="modal-projects-grid">
-            <a href="https://pagkainang-sambayanan-production.up.railway.app/" class="modal-project-card">
-              <span class="project-role">Full Stack Developer</span>
-              <h3 class="project-title">Pagkainang-Sambayanan</h3>
-              <p class="project-desc">Bridging surplus food with communities in need</p>
-            </a>
+          <h3 class="mpc-title">Pagkainang Sambayanan</h3>
+          <p class="mpc-desc">Bridging surplus food with communities in need.</p>
+          <div class="mpc-footer">
+            <span class="mpc-tech">Laravel · MySQL · Bootstrap</span>
           </div>
-        )}
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- ── SCHEDULE A CALL MODAL ── -->
-  <div class="modal-overlay" id="schedule-modal">
-    <div class="modal-backdrop" id="schedule-modal-backdrop"></div>
-    <div class="modal-panel modal-panel--schedule">
+  <!-- ── START FREELANCE PROJECT MODAL ── -->
+  <div class="modal-overlay" id="hire-modal">
+    <div class="modal-backdrop" id="hire-modal-backdrop"></div>
+    <div class="modal-panel modal-panel--freelance">
       <div class="modal-header">
         <h2 class="modal-title">
-          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Schedule a Call
+          <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          Start a Freelance Project
         </h2>
-        <button class="modal-close" id="close-schedule-modal" aria-label="Close">&times;</button>
+        <button class="modal-close" id="close-hire-modal" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
-        <p class="sc-desc">Have a project in mind or want to discuss a collaboration? Book a quick call and we can talk about your idea, goals, and how I can help.</p>
+        <p class="sc-desc">Got a project in mind? Tell me what you need and I'll get back to you within 24 hours.</p>
 
-        <div class="sc-layout">
-          <!-- LEFT: info -->
-          <div class="sc-info">
-            <div class="sc-info-block">
-              <h3 class="sc-block-title">What we can talk about</h3>
-              <ul class="sc-list">
-                <li>Your project or product idea</li>
-                <li>Development requirements</li>
-                <li>Timeline and next steps</li>
-              </ul>
-            </div>
-            <div class="sc-info-block">
-              <h3 class="sc-block-title">Call details</h3>
-              <ul class="sc-list sc-list--details">
-                <li><span class="sc-detail-icon">⏱</span> Duration: 30 minutes</li>
-                <li><span class="sc-detail-icon">📹</span> Platform: Google Meet</li>
-              </ul>
-            </div>
+        <form class="hire-form" id="hire-form" novalidate>
+          <div class="form-field">
+            <label class="form-label" for="hire-name">Name</label>
+            <input class="form-input" type="text" id="hire-name" placeholder="Your name" required />
           </div>
-
-          <!-- RIGHT: form -->
-          <form class="sc-form" id="schedule-form" novalidate>
-            <div class="sc-field">
-              <label class="sc-label" for="sc-name">Your Name</label>
-              <input class="sc-input" type="text" id="sc-name" placeholder="Juan dela Cruz" required />
-            </div>
-            <div class="sc-field">
-              <label class="sc-label" for="sc-email">Email</label>
-              <input class="sc-input" type="email" id="sc-email" placeholder="you@example.com" required />
-            </div>
-            <div class="sc-field">
-              <label class="sc-label" for="sc-details">Project details <span class="sc-optional">(optional)</span></label>
-              <textarea class="sc-input sc-textarea" id="sc-details" placeholder="Brief description of your project or what you'd like to discuss..." rows="3"></textarea>
-            </div>
-            <div class="sc-field">
-              <label class="sc-label">📅 Choose Date & Time</label>
-              <div class="sc-datetime-row">
-                <div class="sc-field">
-                  <label class="sc-label sc-label--sub" for="sc-date">Date</label>
-                  <input class="sc-input" type="date" id="sc-date" required />
-                </div>
-                <div class="sc-field">
-                  <label class="sc-label sc-label--sub" for="sc-time">Time</label>
-                  <input class="sc-input" type="time" id="sc-time" required />
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="sc-submit" id="schedule-submit">Schedule Call</button>
-            <p class="sc-success" id="sc-success" style="display:none">✅ Request sent! I'll confirm via email within 24 hours.</p>
-            <p class="sc-error" id="sc-error" style="display:none">Something went wrong. Email me at <a href="mailto:louinaquines@gmail.com">louinaquines@gmail.com</a></p>
-          </form>
-        </div>
+          <div class="form-field">
+            <label class="form-label" for="hire-email">Email</label>
+            <input class="form-input" type="email" id="hire-email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="hire-message">Tell me about the app, website, or feature you want me to build...</label>
+            <textarea class="form-input form-textarea" id="hire-message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="hire-submit">Send Request</button>
+        </form>
       </div>
     </div>
   </div>
@@ -552,41 +509,41 @@ const galleryImages = [
       reveals.forEach(el => observer.observe(el));
     }
 
-    // ── SCHEDULE MODAL ──
-    const scheduleModal   = document.getElementById('schedule-modal');
-    const openScheduleBtn = document.getElementById('open-schedule-modal');
-    const closeScheduleBtn= document.getElementById('close-schedule-modal');
-    const scheduleBackdrop= document.getElementById('schedule-modal-backdrop');
-    const scheduleForm    = document.getElementById('schedule-form') as HTMLFormElement | null;
+    // ── LATEST PROJECT MODAL ──
+    const projectsModal     = document.getElementById('projects-modal');
+    const openProjectsBtn   = document.getElementById('open-projects-modal');
+    const closeProjectsBtn  = document.getElementById('close-projects-modal');
+    const projectsModalBackdrop = document.getElementById('projects-modal-backdrop');
+    function openProjectsModal()  { projectsModal?.classList.add('active');    document.body.style.overflow = 'hidden'; }
+    function closeProjectsModal() { projectsModal?.classList.remove('active'); document.body.style.overflow = ''; }
+    openProjectsBtn?.addEventListener('click', openProjectsModal);
+    closeProjectsBtn?.addEventListener('click', closeProjectsModal);
+    projectsModalBackdrop?.addEventListener('click', closeProjectsModal);
 
-    // Set min date to today
-    const dateInput = document.getElementById('sc-date') as HTMLInputElement | null;
-    if (dateInput) {
-      dateInput.min = new Date().toISOString().split('T')[0];
-    }
+    // ── HIRE MODAL ──
+    const hireModal     = document.getElementById('hire-modal');
+    const openHireBtn   = document.getElementById('open-hire-modal');
+    const closeHireBtn  = document.getElementById('close-hire-modal');
+    const hireBackdrop  = document.getElementById('hire-modal-backdrop');
+    const hireForm      = document.getElementById('hire-form') as HTMLFormElement | null;
+    function openHireModal()  { hireModal?.classList.add('active');    document.body.style.overflow = 'hidden'; }
+    function closeHireModal() { hireModal?.classList.remove('active'); document.body.style.overflow = ''; }
+    openHireBtn?.addEventListener('click', openHireModal);
+    closeHireBtn?.addEventListener('click', closeHireModal);
+    hireBackdrop?.addEventListener('click', closeHireModal);
 
-    function openScheduleModal()  { scheduleModal?.classList.add('active');    document.body.style.overflow = 'hidden'; }
-    function closeScheduleModal() { scheduleModal?.classList.remove('active'); document.body.style.overflow = ''; }
-    openScheduleBtn?.addEventListener('click', openScheduleModal);
-    closeScheduleBtn?.addEventListener('click', closeScheduleModal);
-    scheduleBackdrop?.addEventListener('click', closeScheduleModal);
-
-    scheduleForm?.addEventListener('submit', (e) => {
+    hireForm?.addEventListener('submit', (e) => {
       e.preventDefault();
-      const submitBtn = document.getElementById('schedule-submit') as HTMLButtonElement | null;
+      const submitBtn = document.getElementById('hire-submit') as HTMLButtonElement | null;
+      const name    = (document.getElementById('hire-name')    as HTMLInputElement)?.value.trim()    || '';
+      const email   = (document.getElementById('hire-email')   as HTMLInputElement)?.value.trim()    || '';
+      const message = (document.getElementById('hire-message') as HTMLTextAreaElement)?.value.trim() || '';
 
-      const name    = (document.getElementById('sc-name')    as HTMLInputElement)?.value.trim()    || '';
-      const email   = (document.getElementById('sc-email')   as HTMLInputElement)?.value.trim()    || '';
-      const details = (document.getElementById('sc-details') as HTMLTextAreaElement)?.value.trim() || 'N/A';
-      const date    = (document.getElementById('sc-date')    as HTMLInputElement)?.value           || '';
-      const time    = (document.getElementById('sc-time')    as HTMLInputElement)?.value           || '';
-
-      // Validation
-      if (!name || !email || !date || !time) {
+      if (!name || !email || !message) {
         (window as any).Swal?.fire({
           icon: 'warning',
           title: 'Missing fields',
-          text: 'Please fill in your name, email, date, and time.',
+          text: 'Please fill in all fields before sending.',
           confirmButtonColor: '#374151',
           background: 'var(--color-bg-secondary)',
           color: 'var(--color-text)',
@@ -594,40 +551,24 @@ const galleryImages = [
         return;
       }
 
-      if (submitBtn) { submitBtn.textContent = 'Scheduling...'; submitBtn.disabled = true; }
-
-      // Format readable datetime for email
-      const dateObj  = new Date(`${date}T${time}`);
-      const readable = dateObj.toLocaleString('en-PH', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-
-      const subject = encodeURIComponent(`Call Request from ${name}`);
-      const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nRequested Time: ${readable}\n\nProject Details:\n${details}`);
+      if (submitBtn) { submitBtn.textContent = 'Sending...'; submitBtn.disabled = true; }
+      const subject = encodeURIComponent(`Freelance Project Request from ${name}`);
+      const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nProject Details:\n${message}`);
       window.open(`mailto:louinaquines@gmail.com?subject=${subject}&body=${body}`, '_blank');
-
-      if (submitBtn) { submitBtn.textContent = 'Schedule Call'; submitBtn.disabled = false; }
-
-      // Reset form
-      scheduleForm?.reset();
-
-      // Close modal first, then show SweetAlert
-      closeScheduleModal();
-
+      if (submitBtn) { submitBtn.textContent = 'Send Request'; submitBtn.disabled = false; }
+      hireForm?.reset();
+      closeHireModal();
       setTimeout(() => {
         (window as any).Swal?.fire({
           icon: 'success',
-          title: '🗓️ Call Scheduled!',
-          html: `
-            <p style="margin:0 0 0.5rem;color:var(--color-text-secondary)">Thanks, <strong>${name}</strong>! Your call request has been sent.</p>
-            <p style="margin:0;font-size:0.875rem;color:var(--color-text-muted)">📅 ${readable}</p>
-            <p style="margin:0.75rem 0 0;font-size:0.85rem;color:var(--color-text-muted)">I'll confirm via email within 24 hours. See you then! 👋</p>
-          `,
-          confirmButtonText: 'Sounds good!',
+          title: '💼 Request Sent!',
+          html: `<p style="color:var(--color-text-secondary)">Thanks, <strong>${name}</strong>! I'll review your request and reply within 24 hours.</p>`,
+          confirmButtonText: 'Awesome!',
           confirmButtonColor: '#374151',
           background: 'var(--color-bg-secondary)',
           color: 'var(--color-text)',
-          timer: 8000,
+          timer: 6000,
           timerProgressBar: true,
-          showClass: { popup: 'animate__animated animate__fadeInDown' },
         });
       }, 300);
     });
@@ -654,30 +595,23 @@ const galleryImages = [
     closeExpBtn?.addEventListener('click', closeExpModal);
     expBackdrop?.addEventListener('click', closeExpModal);
 
-    // ── PROJECTS MODAL ──
+    // ── PROJECTS CARD MODAL (kept for "View All" in projects section) ──
     const projectsModal = document.getElementById('projects-modal');
     const openBtn = document.getElementById('open-projects-modal');
     const closeBtn = document.getElementById('close-projects-modal');
     const modalBackdrop = document.getElementById('modal-backdrop');
+    function openModal() { projectsModal?.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { projectsModal?.classList.remove('active'); document.body.style.overflow = ''; }
+    if (openBtn) { openBtn.addEventListener('click', openModal); }
+    if (closeBtn) { closeBtn.addEventListener('click', closeModal); }
+    if (modalBackdrop) { modalBackdrop.addEventListener('click', closeModal); }
 
-    function openModal() {
-      projectsModal?.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-      projectsModal?.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    openBtn?.addEventListener('click', openModal);
-    closeBtn?.addEventListener('click', closeModal);
-    modalBackdrop?.addEventListener('click', closeModal);
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
-        if (projectsModal?.classList.contains('active')) closeModal();
+        if (projectsModal?.classList.contains('active')) closeProjectsModal();
+        if (hireModal?.classList.contains('active')) closeHireModal();
         if (stackModal?.classList.contains('active')) closeStackModal();
         if (expModal?.classList.contains('active')) closeExpModal();
-        if (scheduleModal?.classList.contains('active')) closeScheduleModal();
       }
     });
 
@@ -1047,6 +981,139 @@ const galleryImages = [
     transition: border-color 0.2s;
   }
   .modal-project-card:hover { border-color: var(--color-text-muted); }
+  
+  /* Modal Project Card - Single Project View */
+  .modal-project-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.75rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .modal-project-card:hover {
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: translateY(-2px);
+  }
+  .mpc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+  .mpc-role-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    border: 1px solid rgba(139,92,246,0.25);
+    color: #a78bfa;
+    padding: 0.2rem 0.55rem;
+    border-radius: 20px;
+  }
+  .mpc-link-icon {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .modal-project-card:hover .mpc-link-icon {
+    transform: translate(2px, -2px);
+    color: var(--color-text);
+  }
+  .mpc-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
+  }
+  .mpc-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0 0 1rem;
+  }
+  .mpc-footer {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .mpc-tech {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-family: ui-monospace, monospace;
+  }
+
+  /* Hire Form Styles */
+  .hire-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .form-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .form-input {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.65rem 0.875rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .form-input:focus {
+    border-color: rgba(139, 92, 246, 0.5);
+  }
+  .form-input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 1;
+  }
+  .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .form-submit {
+    margin-top: 0.5rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    width: 100%;
+  }
+  .form-submit:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+  .form-submit:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+
   .modal-empty {
     text-align: center;
     padding: 2rem;
@@ -1322,7 +1389,169 @@ const galleryImages = [
   }
   .btn-secondary:hover { border-color: var(--color-text-muted); }
 
-  /* ── SCHEDULE MODAL ── */
+  /* ── FREELANCE MODAL ── */
+  .modal-panel--freelance {
+    max-width: 720px;
+  }
+  .modal-panel--gallery {
+    max-width: 820px;
+  }
+
+  /* Glassmorphism upgrade for modal panels */
+  .modal-panel {
+    background: rgba(17, 17, 17, 0.92);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  [data-theme="light"] .modal-panel {
+    background: rgba(245, 245, 245, 0.92);
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  /* ── GALLERY MODAL PROJECTS ── */
+  .gallery-modal-intro {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+  }
+  .gallery-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .gp-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .gp-card:hover { border-color: rgba(139, 92, 246, 0.5); transform: translateY(-2px); }
+  .gp-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .gp-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    border: 1px solid rgba(139,92,246,0.25);
+    color: #a78bfa;
+    padding: 0.2rem 0.55rem;
+    border-radius: 20px;
+  }
+  .gp-stack-tag {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    font-family: ui-monospace, monospace;
+  }
+  .gp-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.3;
+  }
+  .gp-desc {
+    font-size: 0.8375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    margin: 0;
+    flex: 1;
+  }
+  .gp-links {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+  .gp-link {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .gp-link:hover { opacity: 0.8; transform: translateY(-1px); }
+  .gp-link--demo {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: #fff;
+  }
+  .gp-link--code {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+  }
+  .gp-link--wip {
+    background: rgba(161, 161, 170, 0.15);
+    color: var(--color-text-muted);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* ── FREELANCE SERVICE MENU ── */
+  .fl-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .fl-services { display: flex; flex-direction: column; gap: 0.75rem; }
+  .fl-services-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin: 0 0 0.25rem;
+  }
+  .fl-service-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .fl-service-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.2s;
+  }
+  .fl-service-item:hover { border-color: rgba(139,92,246,0.4); }
+  .fl-service-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .fl-service-item strong {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text);
+    margin-bottom: 0.15rem;
+  }
+  .fl-service-item p {
+    font-size: 0.775rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.4;
+  }
+  .sc-textarea--tall {
+    min-height: 120px;
+  }
+
+  /* ── SCHEDULE MODAL (legacy) ── */
   .modal-panel--schedule {
     max-width: 680px;
   }
@@ -1532,6 +1761,18 @@ const galleryImages = [
     .projects-grid { grid-template-columns: 1fr; }
     .modal-projects-grid { grid-template-columns: 1fr; }
     .sc-layout { grid-template-columns: 1fr; gap: 1.25rem; }
+    .fl-layout { grid-template-columns: 1fr; gap: 1.25rem; }
+    .gallery-projects-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 500px) {
+    /* Full-screen modals on mobile */
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    .modal-panel {
+      border-radius: 20px 20px 0 0;
+      max-height: 92vh;
+      width: 100%;
+      max-width: 100%;
+    }
   }
   @media (max-width: 480px) {
     .page { padding: 1rem 1rem 4rem; }
