@@ -959,15 +959,19 @@ const galleryImages = [
     gap: 0.75rem;
   }
   .modal-project-card {
-    display: block;
-    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
     background: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: 10px;
+    border-radius: 12px;
     text-decoration: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, transform 0.2s;
   }
-  .modal-project-card:hover { border-color: var(--color-text-muted); }
+  .modal-project-card:hover {
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: translateY(-2px);
+  }
   
   /* Modal Project Card - Single Project View */
   .modal-project-card {
@@ -1011,7 +1015,7 @@ const galleryImages = [
     color: var(--color-text);
   }
   .mpc-title {
-    font-size: 1.35rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--color-text);
     margin: 0 0 0.5rem;
@@ -1055,8 +1059,8 @@ const galleryImages = [
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: 8px;
-    padding: 0.65rem 0.875rem;
-    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
     color: var(--color-text);
     font-family: inherit;
     outline: none;
@@ -1083,8 +1087,8 @@ const galleryImages = [
     color: #fff;
     border: none;
     border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.95rem;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.875rem;
     font-weight: 600;
     font-family: inherit;
     cursor: pointer;
