@@ -19,7 +19,7 @@
 
     <div class="cb-header">
       <div class="cb-header-avatar">
-        L
+        <img src="/profile.jpeg" alt="Loui" class="cb-avatar-img" />
         <span class="cb-online-dot"></span>
       </div>
       <div class="cb-header-meta">
@@ -178,6 +178,17 @@
     min-width: 38px;
     border-radius: 50%;
     background: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .cb-wrapper .cb-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
     color: var(--color-bg);
     font-size: 0.8rem;
     font-weight: 700;
