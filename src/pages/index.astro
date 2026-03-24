@@ -273,6 +273,29 @@ const galleryImages = [
               </div>
             </li>
           </div>
+
+          <!-- Recent Certifications -->
+          <div class="certifications-section">
+            <h3 class="certifications-title">Recent Certifications</h3>
+            <div class="certifications-grid">
+              <a href="https://web.facebook.com/photo/?fbid=4320544268000607&set=a.103031433085266" target="_blank" rel="noopener" class="certification-card">
+                <h4 class="cert-name">Huawei Developer Expert</h4>
+                <span class="cert-issuer">Huawei</span>
+              </a>
+              <a href="https://www.credly.com/badges/d4ea07f0-f7f1-4889-8b15-2a0ec22850ff/public_url" target="_blank" rel="noopener" class="certification-card">
+                <h4 class="cert-name">Generative AI Leader</h4>
+                <span class="cert-issuer">Google</span>
+              </a>
+              <a href="https://app.testdome.com/cert/e802401d0f874e78b3e4bceff900c52f" target="_blank" rel="noopener" class="certification-card">
+                <h4 class="cert-name">Software Engineering</h4>
+                <span class="cert-issuer">TestDome</span>
+              </a>
+              <a href="https://catalog-education.oracle.com/pls/certview/sharebadge?id=F0EB18EE68E7EB1AD69624684FB5B8ABB18AC8852C247882BE5DF4E51D7AAB07" target="_blank" rel="noopener" class="certification-card">
+                <h4 class="cert-name">Generative AI Professional</h4>
+                <span class="cert-issuer">Oracle</span>
+              </a>
+            </div>
+          </div>
         </section>
 
       </div>
@@ -1231,6 +1254,49 @@ const galleryImages = [
     transition: color 0.2s;
   }
   .contact-value:hover { color: var(--color-text); }
+
+  /* ── CERTIFICATIONS SECTION ── */
+  .certifications-section {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .certifications-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  .certification-card {
+    display: block;
+    padding: 0.625rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .certification-card:hover {
+    border-color: var(--color-text-muted);
+    background: var(--color-bg-elevated);
+  }
+  .cert-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 0.2rem;
+  }
+  .cert-issuer {
+    font-size: 0.625rem;
+    color: var(--color-text-muted);
+  }
 
   /* ── BUTTONS ── */
   .btn-primary {
