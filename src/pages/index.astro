@@ -1398,33 +1398,37 @@ const galleryImages = [
     max-width: 600px;
   }
 
-  /* Glassmorphism upgrade for modal panels */
-  .modal-panel {
+  /* 
+  Glassmorphism upgrade for modal panels - dark mode only
+  COMMENTED OUT - Using CSS variables instead for proper light/dark mode
+  
+  :not([data-theme="light"]) .modal-panel {
     background: rgba(17, 17, 17, 0.92);
     backdrop-filter: blur(20px) saturate(1.4);
     -webkit-backdrop-filter: blur(20px) saturate(1.4);
     border: 1px solid rgba(255,255,255,0.08);
   }
   
-  /* Light mode - completely remove glassmorphism and use solid colors */
+  /* Light mode - use CSS variables */
   [data-theme="light"] .modal-panel {
-    background: #ffffff !important;
-    border: 1px solid #e5e5e5 !important;
+    background: var(--color-bg-secondary, #f5f5f5) !important;
+    border: 1px solid var(--color-border, #e5e5e5) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
   }
+  */
   [data-theme="light"] .modal-header {
-    border-bottom-color: #e5e5e5;
+    border-bottom-color: var(--color-border, #e5e5e5);
   }
   [data-theme="light"] .modal-title {
-    color: #171717;
+    color: var(--color-text, #171717);
   }
   [data-theme="light"] .modal-close {
-    color: #525252;
+    color: var(--color-text-secondary, #525252);
   }
   [data-theme="light"] .modal-close:hover {
-    color: #171717;
+    color: var(--color-text, #171717);
   }
 
   /* Light mode modal content */
