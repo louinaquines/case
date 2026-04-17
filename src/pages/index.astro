@@ -530,8 +530,15 @@ const galleryImages = [
       void startMusic();
       bgMusic.addEventListener('loadedmetadata', () => { void startMusic(); });
       bgMusic.addEventListener('canplaythrough', () => { void startMusic(); });
-      document.addEventListener('pointerdown', () => { void unlockAudio(); }, { once: true });
-      document.addEventListener('keydown', () => { void unlockAudio(); }, { once: true });
+      const onFirstGesture = () => {
+        void unlockAudio();
+      };
+
+      document.addEventListener('pointerdown', onFirstGesture, { once: true, capture: true });
+      document.addEventListener('touchstart', onFirstGesture, { once: true, capture: true });
+      document.addEventListener('touchend', onFirstGesture, { once: true, capture: true });
+      document.addEventListener('click', onFirstGesture, { once: true, capture: true });
+      document.addEventListener('keydown', onFirstGesture, { once: true, capture: true });
     }
 
     // ── PAGE LOADER ──
