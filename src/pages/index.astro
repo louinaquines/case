@@ -314,6 +314,16 @@ const galleryImages = [
               </div>
           </div>
         </section>
+
+        <!-- AUDIO -->
+        <section class="card reveal reveal-left" style="animation-delay:0.25s">
+          <h2 class="card-title">Featured Audio</h2>
+          <p class="card-sub">Listen to "Seven".</p>
+          <audio controls preload="metadata" class="audio-player">
+            <source src="/audio/Seven.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        </section>
       </div>
     </div>
   </main>
@@ -921,6 +931,10 @@ const galleryImages = [
     color: var(--color-text-secondary);
     line-height: 1.5;
     margin: 0;
+  }
+
+  .audio-player {
+    width: 100%;
   }
 
   /* ── PROJECTS MODAL ── */
