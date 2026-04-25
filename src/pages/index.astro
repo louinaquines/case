@@ -75,6 +75,9 @@ const galleryImages = [
   <StructuredData type="Person" />
 
   <main class="page">
+    <audio id="bg-music" preload="auto" loop autoplay muted playsinline>
+      <source src="/audio/Seven.mp3" type="audio/mpeg" />
+    </audio>
 
     <!-- ── PAGE LOADER ── -->
     <div id="page-loader" class="page-loader">
@@ -331,6 +334,7 @@ const galleryImages = [
               </div>
           </div>
         </section>
+
       </div>
     </div>
   </main>
@@ -514,6 +518,45 @@ const galleryImages = [
 
 <script>
   document.addEventListener('astro:page-load', () => {
+    const bgMusic = document.getElementById('bg-music') as HTMLAudioElement | null;
+
+    if (bgMusic) {
+      bgMusic.volume = 0.5;
+      bgMusic.muted = true;
+
+      const startMusic = async () => {
+        try {
+          await bgMusic.play();
+          // Try to unmute after autoplay begins.
+          setTimeout(() => {
+            bgMusic.muted = false;
+            bgMusic.volume = 0.5;
+          }, 250);
+          return true;
+        } catch {
+          return false;
+        }
+      };
+
+      const unlockAudio = async () => {
+        bgMusic.muted = false;
+        bgMusic.volume = 0.5;
+        await startMusic();
+      };
+
+      void startMusic();
+      bgMusic.addEventListener('loadedmetadata', () => { void startMusic(); });
+      bgMusic.addEventListener('canplaythrough', () => { void startMusic(); });
+      const onFirstGesture = () => {
+        void unlockAudio();
+      };
+
+      document.addEventListener('pointerdown', onFirstGesture, { once: true, capture: true });
+      document.addEventListener('touchstart', onFirstGesture, { once: true, capture: true });
+      document.addEventListener('touchend', onFirstGesture, { once: true, capture: true });
+      document.addEventListener('click', onFirstGesture, { once: true, capture: true });
+      document.addEventListener('keydown', onFirstGesture, { once: true, capture: true });
+    }
 
     // ── PAGE LOADER ──
     const loader = document.getElementById('page-loader');
